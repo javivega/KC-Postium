@@ -29,15 +29,18 @@ export class PostService {
      |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)        |
      |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
      |----------------------------------------------------------------------------------------------*/
-    let ahora = Date.now();
+     
+
+    const filterPostDate: string = `publicationDate_lte=${Date.now()}`;
+    const orderPostDate: string = '_sort=publicationDate&_order=DESC';
      
     return this._http
-      .get(`${this._backendUri}/posts?publicationDate_lte=${ahora}&_sort=publicationDate&_order=DESC`)
+      .get(`${this._backendUri}/posts?${filterPostDate}&${orderPostDate}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
   }
 
   getUserPosts(id: number): Observable<Post[]> {
-
+      
     /*----------------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                             |
      |----------------------------------------------------------------------------------------------|
@@ -54,9 +57,12 @@ export class PostService {
      |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)        |
      |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
      |----------------------------------------------------------------------------------------------*/
-
+    const filterPostDate: string = `publicationDate_lte=${Date.now()}`;
+    const orderPostDate: string = '_sort=publicationDate&_order=DESC';
+    const authorFilter: string = `author.id=${id}`;
+    
     return this._http
-      .get(`${this._backendUri}/posts`)
+      .get(`${this._backendUri}/posts?${authorFilter}&${filterPostDate}&${orderPostDate}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
   }
 

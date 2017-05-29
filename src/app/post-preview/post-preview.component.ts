@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter} from '@angular/core';
 
 import { Post } from './../post';
+import { User } from './../user';
 
 @Component({
   selector: 'post-preview',
@@ -27,13 +28,19 @@ export class PostPreviewComponent {
    | clic se realiza en el template de este componente, necesitas, además, un manejador para el mismo.                |
    |------------------------------------------------------------------------------------------------------------------*/
    @Output() postClick: EventEmitter<Post>
+   @Output() authorClick: EventEmitter<User>
 
    constructor(){
      this.postClick = new EventEmitter<Post>();
+     this.authorClick = new EventEmitter<User>();
    }
 
    postClickhandler(post: Post): void{
      this.postClick.emit(post);
+   }
+
+   authorClickHandler(postAuthor: User): void{
+    this.authorClick.emit(postAuthor);
    }
 
   plainTextToHtml(text: string): string {

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Post } from './../post';
+import { User } from './../user';
 
 @Component({
   selector: 'posts-list',
@@ -21,7 +22,7 @@ export class PostsListComponent {
    | La ruta a navegar es '/posts/users', pasando como parámetro el identificador del autor.                          |
    |------------------------------------------------------------------------------------------------------------------*/
 
-   constructor(private _router: Router){}
+  constructor(private _router: Router) { }
 
   /*-----------------------------------------------------------------------------------------------------------------|
    | ~~~ Green Path ~~~                                                                                              |
@@ -31,9 +32,12 @@ export class PostsListComponent {
    | a navegar es '/posts', pasando como parámetro el identificador del post.                                        |
    |-----------------------------------------------------------------------------------------------------------------*/
 
-   viewPostDetail(post: Post): void{
-    this._router.navigate(['posts', post.id])
-   }
+  viewPostDetail(post: Post): void {
+    this._router.navigate(['posts', post.id]);
+  }
 
+  toUserPosts(user: User) {
+    this._router.navigate(['posts', 'users', user.id]);
+  }
 
 }
