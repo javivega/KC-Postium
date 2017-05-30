@@ -96,15 +96,15 @@ export class PostService {
       .get(`${this._backendUri}/posts?${filterPostDate}&${orderPostDate}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()))
       .map((posts: Post[]): Post[] => {
-        let result = [];
+        let categoryArray = [];
         for (let post of posts) {
           for (let category of post.categories) {
             if (category.id == id) {
-              result.push(post)
+              categoryArray.push(post)
             }
           }
         }
-        return result;
+        return categoryArray;
       });
   }
 

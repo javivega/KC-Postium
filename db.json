@@ -312,6 +312,22 @@
       },
       "likes": [],
       "id": 12
+    },
+    {
+      "title": "Historia 2",
+      "intro": "Historia de prueba 2",
+      "body": "Esta es la segunda historia de prueba",
+      "publicationDate": 1496173666945,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "likes": [],
+      "id": 13
     }
   ],
   "categories": [
