@@ -280,6 +280,38 @@
         2
       ],
       "id": 10
+    },
+    {
+      "title": "Historia de prueba",
+      "intro": "Esta es la introducción de la historia de prueba",
+      "body": "Esta es la historia de prueba en su body",
+      "publicationDate": 1496153122801,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "likes": [],
+      "id": 11
+    },
+    {
+      "title": "Historia de prueba publicacion futura",
+      "intro": "Esta es una historia que se publicara en el futuro no ahoera",
+      "body": "Historia de prueba 2",
+      "publicationDate": 1496325900000,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "likes": [],
+      "id": 12
     }
   ],
   "categories": [

@@ -5,6 +5,7 @@ import "rxjs/add/operator/map";
 
 import { BackendUri } from './settings';
 import { Post } from './post';
+//import { Category } from './category';
 
 @Injectable()
 export class PostService {
@@ -29,18 +30,18 @@ export class PostService {
      |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)        |
      |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
      |----------------------------------------------------------------------------------------------*/
-     
+
 
     const filterPostDate: string = `publicationDate_lte=${Date.now()}`;
     const orderPostDate: string = '_sort=publicationDate&_order=DESC';
-     
+
     return this._http
       .get(`${this._backendUri}/posts?${filterPostDate}&${orderPostDate}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
   }
 
   getUserPosts(id: number): Observable<Post[]> {
-      
+
     /*----------------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                             |
      |----------------------------------------------------------------------------------------------|
@@ -60,7 +61,7 @@ export class PostService {
     const filterPostDate: string = `publicationDate_lte=${Date.now()}`;
     const orderPostDate: string = '_sort=publicationDate&_order=DESC';
     const authorFilter: string = `author.id=${id}`;
-    
+
     return this._http
       .get(`${this._backendUri}/posts?${authorFilter}&${filterPostDate}&${orderPostDate}`)
       .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
@@ -88,11 +89,27 @@ export class PostService {
      |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)            |
      |   - Ordenación: _sort=publicationDate&_order=DESC                                                |
      |--------------------------------------------------------------------------------------------------*/
+    const filterPostDate: string = `publicationDate_lte=${Date.now()}`;
+    const orderPostDate: string = '_sort=publicationDate&_order=DESC';
 
     return this._http
-      .get(`${this._backendUri}/posts`)
-      .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
+      .get(`${this._backendUri}/posts?${filterPostDate}&${orderPostDate}`)
+      .map((response: Response): Post[] => Post.fromJsonToList(response.json()))
+      .map((posts: Post[]): Post[] => {
+        let result = [];
+        for (let post of posts) {
+          for (let category of post.categories) {
+            if (category.id == id) {
+              result.push(post)
+            }
+          }
+        }
+        return result;
+      });
   }
+
+
+
 
   getPostDetails(id: number): Observable<Post> {
     return this._http
@@ -112,7 +129,10 @@ export class PostService {
      | 'fromJson() para crar un nuevo objeto Post basado en la respuesta HTTP obtenida. |
      |----------------------------------------------------------------------------------*/
 
-    return null;
+
+    return this._http
+      .post(`${this._backendUri}/posts/`, post)
+      .map((response: Response): Post => Post.fromJson(response.json()));
   }
 
 }
