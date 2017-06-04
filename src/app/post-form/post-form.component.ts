@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 
 import { Post } from './../post';
@@ -14,6 +14,7 @@ export class PostFormComponent implements OnInit {
   private _nowDatetimeLocal: string;
   private _publicationDateScheduled: boolean = false;
 
+  @Input() post: Post;
   @Output() postSubmitted: EventEmitter<Post> = new EventEmitter();
 
   ngOnInit(): void {
@@ -61,14 +62,33 @@ export class PostFormComponent implements OnInit {
      | nada a lo indicado en el formulario. Por tanto, pon especial atención a que los nombres indicados en los    |
      | distintos elementos del formulario se correspondan con las propiedades de la clase Post.                    |
      |-------------------------------------------------------------------------------------------------------------*/
-     
+
+    /*
+Propiedades el post a validar
+json.id,
+     json.title,
+     json.intro,
+     json.body,
+     json.media,
+     json.publicationDate,
+     json.categories,
+     json.author,
+     json.likes
+*/
 
     let post: Post = Post.fromJson(form.value);
-    post.likes = [];
-    post.categories = [];
-    post.author = User.defaultUser();
-    post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
+    post = {
+      ...this.post,
+      title: post.title,
+      intro: post.intro,
+      body: post.body,
+      likes: this.post ? this.post.likes : [],
+      media: this.post ? this.post.media : '',
+      categories: this.post ? this.post.categories : [],
+      author: User.defaultUser(),
+      publicationDate: this._getPostPublicationDate(form.value.publicationDate)
+    }
     this.postSubmitted.emit(post);
   }
-
 }
+

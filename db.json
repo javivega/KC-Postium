@@ -328,6 +328,40 @@
       },
       "likes": [],
       "id": 13
+    },
+    {
+      "title": "Post validation",
+      "intro": "Nueva historia post validado",
+      "body": "Post para comprobar validación",
+      "likes": [],
+      "media": "",
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "publicationDate": 1496574719130,
+      "id": 14
+    },
+    {
+      "title": "Ultimo post",
+      "intro": "Ultimo post previo entrega practica",
+      "body": "Ultimo post antes de la entrega",
+      "likes": [],
+      "media": "",
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "publicationDate": 1496574812977,
+      "id": 15
     }
   ],
   "categories": [
